@@ -77,6 +77,7 @@ func main() {
 
 		// Launch the worker goroutine.
 		go worker(w, jobs, results, &wg)
+
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -262,3 +263,4 @@ func main() {
 // 🏢 Manager (main) reads from the done basket and prints the results.
 //
 //////////////////////////////////////////////////////////////////////
+
