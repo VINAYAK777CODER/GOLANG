@@ -73,3 +73,73 @@ func main() {
 	//
 	// select NEVER executes both cases in one call.
 }
+
+
+
+
+/*
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	// Store the time when the program starts.
+	// We will use this to print how much time has passed.
+	start := time.Now()
+
+	// tick: A channel that sends a signal every 100 milliseconds.
+	// It's like a timer that repeatedly "ticks".
+	tick := time.Tick(100 * time.Millisecond)
+
+	// boom: A channel that sends ONE signal after 500 milliseconds.
+	// After it sends the signal once, it will never send again.
+	boom := time.After(500 * time.Millisecond)
+
+	// elapsed(): A small function that returns
+	// how much time has passed since the program started.
+	elapsed := func() time.Duration {
+		return time.Since(start).Round(time.Millisecond)
+	}
+
+	// Infinite loop that keeps checking which event happened.
+	for {
+		select {
+
+		// ------------------------------
+		// CASE 1: tick event
+		// This runs every time 100ms passes.
+		// ------------------------------
+		case <-tick:
+			fmt.Printf("[%6s] tick.\n", elapsed())
+
+		// ------------------------------
+		// CASE 2: boom event
+		// This will happen ONCE at exactly 500ms.
+		// When this happens, the program prints "BOOM!" and exits.
+		// ------------------------------
+		case <-boom:
+			fmt.Printf("[%6s] BOOM!\n", elapsed())
+			return // Exit the program
+
+		// ------------------------------
+		// DEFAULT CASE
+		// This runs when NEITHER tick nor boom is ready.
+		// Meaning: select does NOT block waiting.
+		// ------------------------------
+		default:
+			// Print a dot to show "nothing happened right now".
+			fmt.Printf("[%6s]     .\n", elapsed())
+
+			// Sleep 50ms so the program doesn't run too fast.
+			time.Sleep(50 * time.Millisecond)
+		}
+	}
+}
+
+
+
+*/
